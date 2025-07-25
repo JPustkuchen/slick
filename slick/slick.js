@@ -192,7 +192,8 @@
         var _ = this;
 
         _.$slideTrack.find('.slick-active').attr({
-            'aria-hidden': 'false'
+            'aria-hidden': 'false',
+             'tabindex': '0'
         }).find('a, input, button, select').attr({
             'tabindex': '0'
         });
@@ -1104,13 +1105,13 @@
         if (_.options.infinite === true) {
             if (_.slideCount > _.options.slidesToShow) {
                 _.slideOffset = (_.slideWidth * _.options.slidesToShow) * -1;
-                coef = -1
+                coef = -1;
 
                 if (_.options.vertical === true && _.options.centerMode === true) {
                     if (_.options.slidesToShow === 2) {
                         coef = -1.5;
                     } else if (_.options.slidesToShow === 1) {
-                        coef = -2
+                        coef = -2;
                     }
                 }
                 verticalOffset = (verticalHeight * _.options.slidesToShow) * coef;
@@ -1349,7 +1350,7 @@
                 });
 
                 if (slideControlIndex !== -1) {
-                   var ariaButtonControl = 'slick-slide-control' + _.instanceUid + slideControlIndex
+                   var ariaButtonControl = 'slick-slide-control' + _.instanceUid + slideControlIndex;
                    if ($('#' + ariaButtonControl).length) {
                      $(this).attr({
                          'aria-describedby': ariaButtonControl
@@ -2441,18 +2442,18 @@
                 for (i = _.slideCount; i > (_.slideCount -
                         infiniteCount); i -= 1) {
                     slideIndex = i - 1;
-                    $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                    $(_.$slides[slideIndex]).clone(true).removeAttr('id')
                         .attr('data-slick-index', slideIndex - _.slideCount)
                         .prependTo(_.$slideTrack).addClass('slick-cloned');
                 }
                 for (i = 0; i < infiniteCount  + _.slideCount; i += 1) {
                     slideIndex = i;
-                    $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                    $(_.$slides[slideIndex]).clone(true).removeAttr('id')
                         .attr('data-slick-index', slideIndex + _.slideCount)
                         .appendTo(_.$slideTrack).addClass('slick-cloned');
                 }
                 _.$slideTrack.find('.slick-cloned').find('[id]').each(function() {
-                    $(this).attr('id', '');
+                    $(this).removeAttr('id');
                 });
 
             }
